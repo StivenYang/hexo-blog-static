@@ -15,19 +15,20 @@
 <!-- End Google Analytics -->
 
   
-  <title>常用的子网掩码 | StivenYang</title>
+  <title>常用的子网掩码、内网段 | StivenYang</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="子网段及掩码">
+  <meta name="description" content="子网段及掩码及内网段">
 <meta property="og:type" content="article">
-<meta property="og:title" content="常用的子网掩码">
+<meta property="og:title" content="常用的子网掩码、内网段">
 <meta property="og:url" content="https://blog.hengshare.top/2023/03/27/%E5%B8%B8%E7%94%A8%E7%9A%84%E5%AD%90%E7%BD%91%E6%8E%A9%E7%A0%81/index.html">
 <meta property="og:site_name" content="StivenYang">
-<meta property="og:description" content="子网段及掩码">
+<meta property="og:description" content="子网段及掩码及内网段">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-03-27T03:41:20.000Z">
-<meta property="article:modified_time" content="2023-04-08T07:23:09.481Z">
+<meta property="article:modified_time" content="2023-04-11T02:51:40.370Z">
 <meta property="article:author" content="StivenYang">
 <meta property="article:tag" content="运维">
+<meta property="article:tag" content="网络">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="StivenYang" type="application/atom+xml">
@@ -111,7 +112,7 @@
         
   
     <h1 class="p-name article-title" itemprop="headline name">
-      常用的子网掩码
+      常用的子网掩码、内网段
     </h1>
   
 
@@ -123,15 +124,394 @@
         
           <div id="toc" class="toc-article">
           <strong class="toc-title">文章目录</strong>
-          
+          <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-number">1.</span> <span class="toc-text">参考资料</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E5%AD%90%E7%BD%91%E6%8E%A9%E7%A0%81%E3%80%81%E5%AD%90%E7%BD%91%E6%AE%B5"><span class="toc-number">2.</span> <span class="toc-text">常用子网掩码、子网段</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E5%86%85%E7%BD%91%E6%AE%B5"><span class="toc-number">3.</span> <span class="toc-text">常用内网段</span></a></li></ol>
         </div>
         
-        <p>| — | — | — |<br>| CIDR | 子网掩码 | 反掩码 |<br>|&#x2F;30 | 255.255.255.252 | 0.0.0.3 |<br>| &#x2F;29 | 255.255.255.248 | 0.0.0.7 |<br>| &#x2F;28 | 255.255.255.240 | 0.0.0.15 |<br>| &#x2F;27 | 255.255.255.224 | 0.0.0.31 |<br>| &#x2F;26 | 255.255.255.192 | 0.0.0.63 |<br>| &#x2F;25 | 255.255.255.128 | 0.0.0.127 |<br>| &#x2F;24 | 255.255.255.0 | 0.0.0.255 |<br>| &#x2F;23 | 255.255.254.0 | 0.0.1.255 |<br>| &#x2F;22 | 255.255.252.0 | 0.0.3.255 |<br>| &#x2F;21 | 255.255.248.0 | 0.0.7.255 |<br>| &#x2F;20 | 255.255.240.0 | 0.0.15.255 |<br>| &#x2F;19 | 255.255.224.0 | 0.0.31.255 |<br>| &#x2F;18 | 255.255.192.0 | 0.0.63.255 |<br>| &#x2F;17 | 255.255.128.0 | 0.0.0.127.255 |<br>| &#x2F;16 | 255.255.0.0 | 0.0.255.255 |<br>| &#x2F;15 | 255.254.0.0 |  0.1.255.255 |<br>| &#x2F;14 | 255.252.0.0 | 0.3.255.255 |<br>| &#x2F;13 | 255.248.0.0 | 0.7.255.255 |<br>| &#x2F;12 | 255.240.0.0 | 0.15.255.255 |<br>| &#x2F;11 | 255.224.0.0 |   0.31.255.255 |<br>| &#x2F;10 | 255.192.0.0 | 0.63.255.255 |<br>| &#x2F;9 | 255.128.0.0 | 0.127.255.255 |<br>| &#x2F;8 | 255.0.0.0 | 0.255.255 |</p>
+        <h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p>已归类资料：<br><a target="_blank" rel="noopener" href="https://blog.51cto.com/kinrey/1826921">https://blog.51cto.com/kinrey/1826921</a><br><a target="_blank" rel="noopener" href="https://hczhang.cn/network/reserved-ip-addresses.html">https://hczhang.cn/network/reserved-ip-addresses.html</a></p>
+<p>详细介绍资料：</p>
+<p><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%AD%90%E7%BD%91">https://zh.wikipedia.org/wiki/%E5%AD%90%E7%BD%91</a><br><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%AD%90%E7%BD%91%E6%8E%A9%E7%A0%81/100207">https://baike.baidu.com/item/%E5%AD%90%E7%BD%91%E6%8E%A9%E7%A0%81/100207</a></p>
+<h2 id="常用子网掩码、子网段"><a href="#常用子网掩码、子网段" class="headerlink" title="常用子网掩码、子网段"></a>常用子网掩码、子网段</h2><table>
+<thead>
+<tr>
+<th>CIDR</th>
+<th>子网掩码</th>
+<th>反掩码</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>&#x2F;30</td>
+<td>255.255.255.252</td>
+<td>0.0.0.3</td>
+</tr>
+<tr>
+<td>&#x2F;29</td>
+<td>255.255.255.248</td>
+<td>0.0.0.7</td>
+</tr>
+<tr>
+<td>&#x2F;28</td>
+<td>255.255.255.240</td>
+<td>0.0.0.15</td>
+</tr>
+<tr>
+<td>&#x2F;27</td>
+<td>255.255.255.224</td>
+<td>0.0.0.31</td>
+</tr>
+<tr>
+<td>&#x2F;26</td>
+<td>255.255.255.192</td>
+<td>0.0.0.63</td>
+</tr>
+<tr>
+<td>&#x2F;25</td>
+<td>255.255.255.128</td>
+<td>0.0.0.127</td>
+</tr>
+<tr>
+<td>&#x2F;24</td>
+<td>255.255.255.0</td>
+<td>0.0.0.255</td>
+</tr>
+<tr>
+<td>&#x2F;23</td>
+<td>255.255.254.0</td>
+<td>0.0.1.255</td>
+</tr>
+<tr>
+<td>&#x2F;22</td>
+<td>255.255.252.0</td>
+<td>0.0.3.255</td>
+</tr>
+<tr>
+<td>&#x2F;21</td>
+<td>255.255.248.0</td>
+<td>0.0.7.255</td>
+</tr>
+<tr>
+<td>&#x2F;20</td>
+<td>255.255.240.0</td>
+<td>0.0.15.255</td>
+</tr>
+<tr>
+<td>&#x2F;19</td>
+<td>255.255.224.0</td>
+<td>0.0.31.255</td>
+</tr>
+<tr>
+<td>&#x2F;18</td>
+<td>255.255.192.0</td>
+<td>0.0.63.255</td>
+</tr>
+<tr>
+<td>&#x2F;17</td>
+<td>255.255.128.0</td>
+<td>0.0.0.127.255</td>
+</tr>
+<tr>
+<td>&#x2F;16</td>
+<td>255.255.0.0</td>
+<td>0.0.255.255</td>
+</tr>
+<tr>
+<td>&#x2F;15</td>
+<td>255.254.0.0</td>
+<td>0.1.255.255</td>
+</tr>
+<tr>
+<td>&#x2F;14</td>
+<td>255.252.0.0</td>
+<td>0.3.255.255</td>
+</tr>
+<tr>
+<td>&#x2F;13</td>
+<td>255.248.0.0</td>
+<td>0.7.255.255</td>
+</tr>
+<tr>
+<td>&#x2F;12</td>
+<td>255.240.0.0</td>
+<td>0.15.255.255</td>
+</tr>
+<tr>
+<td>&#x2F;11</td>
+<td>255.224.0.0</td>
+<td>0.31.255.255</td>
+</tr>
+<tr>
+<td>&#x2F;10</td>
+<td>255.192.0.0</td>
+<td>0.63.255.255</td>
+</tr>
+<tr>
+<td>&#x2F;9</td>
+<td>255.128.0.0</td>
+<td>0.127.255.255</td>
+</tr>
+<tr>
+<td>&#x2F;8</td>
+<td>255.0.0.0</td>
+<td>0.255.255</td>
+</tr>
+</tbody></table>
+<h2 id="常用内网段"><a href="#常用内网段" class="headerlink" title="常用内网段"></a>常用内网段</h2><ol>
+<li>ipv4内网段</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>IP地址段</th>
+<th>地址范围</th>
+<th>地址数量</th>
+<th>用途</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0.0.0.0&#x2F;8</td>
+<td>0.0.0.0–0.255.255.255</td>
+<td>16777216</td>
+<td>Software</td>
+<td>Current network (only valid as source address).</td>
+</tr>
+<tr>
+<td>10.0.0.0&#x2F;8</td>
+<td>10.0.0.0–10.255.255.255</td>
+<td>16777216</td>
+<td>Private network</td>
+<td>Used for local communications within a private network.</td>
+</tr>
+<tr>
+<td>100.64.0.0&#x2F;10</td>
+<td>100.64.0.0–100.127.255.255</td>
+<td>4194304</td>
+<td>Private network</td>
+<td>Shared address space for communications between a service provider and its subscribers when using a carrier-grade NAT.</td>
+</tr>
+<tr>
+<td>127.0.0.0&#x2F;8</td>
+<td>127.0.0.0–127.255.255.255</td>
+<td>16777216</td>
+<td>Host</td>
+<td>Used for loopback addresses to the local host.</td>
+</tr>
+<tr>
+<td>169.254.0.0&#x2F;16</td>
+<td>169.254.0.0–169.254.255.255</td>
+<td>65536</td>
+<td>Subnet</td>
+<td>Used for link-local addresses between two hosts on a single link when no IP address is otherwise specified, such as would have normally been retrieved from a DHCP server.</td>
+</tr>
+<tr>
+<td>172.16.0.0&#x2F;12</td>
+<td>172.16.0.0–172.31.255.255</td>
+<td>1048576</td>
+<td>Private network</td>
+<td>Used for local communications within a private network.</td>
+</tr>
+<tr>
+<td>192.0.0.0&#x2F;24</td>
+<td>192.0.0.0–192.0.0.255</td>
+<td>256</td>
+<td>Private network</td>
+<td>IETF Protocol Assignments.</td>
+</tr>
+<tr>
+<td>192.0.2.0&#x2F;24</td>
+<td>192.0.2.0–192.0.2.255</td>
+<td>256</td>
+<td>Documentation</td>
+<td>Assigned as TEST-NET-1, documentation and examples.</td>
+</tr>
+<tr>
+<td>192.88.99.0&#x2F;24</td>
+<td>192.88.99.0–192.88.99.255</td>
+<td>256</td>
+<td>Internet</td>
+<td>Reserved. Formerly used for IPv6 to IPv4 relay (included IPv6 address block 2002::&#x2F;16).</td>
+</tr>
+<tr>
+<td>192.168.0.0&#x2F;16</td>
+<td>192.168.0.0–192.168.255.255</td>
+<td>65536</td>
+<td>Private network</td>
+<td>Used for local communications within a private network.</td>
+</tr>
+<tr>
+<td>198.18.0.0&#x2F;15</td>
+<td>198.18.0.0–198.19.255.255</td>
+<td>131072</td>
+<td>Private network</td>
+<td>Used for benchmark testing of inter-network communications between two separate subnets.</td>
+</tr>
+<tr>
+<td>198.51.100.0&#x2F;24</td>
+<td>198.51.100.0–198.51.100.255</td>
+<td>256</td>
+<td>Documentation</td>
+<td>Assigned as TEST-NET-2, documentation and examples.</td>
+</tr>
+<tr>
+<td>203.0.113.0&#x2F;24</td>
+<td>203.0.113.0–203.0.113.255</td>
+<td>256</td>
+<td>Documentation</td>
+<td>Assigned as TEST-NET-3, documentation and examples.</td>
+</tr>
+<tr>
+<td>224.0.0.0&#x2F;4</td>
+<td>224.0.0.0–239.255.255.255</td>
+<td>268435456</td>
+<td>Internet</td>
+<td>In use for IP multicast. (Former Class D network).</td>
+</tr>
+<tr>
+<td>240.0.0.0&#x2F;4</td>
+<td>240.0.0.0–255.255.255.254</td>
+<td>268435455</td>
+<td>Internet</td>
+<td>Reserved for future use. (Former Class E network).</td>
+</tr>
+<tr>
+<td>255.255.255.255&#x2F;32</td>
+<td>255.255.255.255</td>
+<td>1</td>
+<td>Subnet</td>
+<td>Reserved for the “limited broadcast” destination address.</td>
+</tr>
+</tbody></table>
+<ol start="2">
+<li>ipv6内网段</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>Address block (CIDR)</th>
+<th>First address</th>
+<th>Last address</th>
+<th>Number of addresses</th>
+<th>Usage</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>::&#x2F;0</td>
+<td>::</td>
+<td>ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff</td>
+<td>2128</td>
+<td>Routing</td>
+<td>Default route (no specific route)</td>
+</tr>
+<tr>
+<td>::&#x2F;128</td>
+<td>::</td>
+<td>::</td>
+<td>1</td>
+<td>Software</td>
+<td>Unspecified address.</td>
+</tr>
+<tr>
+<td>::1&#x2F;128</td>
+<td>::1</td>
+<td>::1</td>
+<td>1</td>
+<td>Host</td>
+<td>Loopback address to the local host.</td>
+</tr>
+<tr>
+<td>::ffff:0:0&#x2F;96</td>
+<td>::ffff:0.0.0.0</td>
+<td>::ffff:255.255.255.255</td>
+<td>2128−96 &#x3D; 232 &#x3D; 4294967296</td>
+<td>Software</td>
+<td>IPv4 mapped addresses.</td>
+</tr>
+<tr>
+<td>::ffff:0:0:0&#x2F;96</td>
+<td>::ffff:0:0.0.0.0</td>
+<td>::ffff:0:255.255.255.255</td>
+<td>232</td>
+<td>Software</td>
+<td>IPv4 translated addresses.</td>
+</tr>
+<tr>
+<td>64:ff9b::&#x2F;96</td>
+<td>64:ff9b::0.0.0.0</td>
+<td>64:ff9b::255.255.255.255</td>
+<td>232</td>
+<td>Global Internet</td>
+<td>IPv4&#x2F;IPv6 translation.</td>
+</tr>
+<tr>
+<td>100::&#x2F;64</td>
+<td>100::</td>
+<td>100::ffff:ffff:ffff:ffff</td>
+<td>264</td>
+<td>Routing</td>
+<td>Discard prefix.</td>
+</tr>
+<tr>
+<td>2001::&#x2F;32</td>
+<td>2001::</td>
+<td>2001::ffff:ffff:ffff:ffff:ffff:ffff</td>
+<td>296</td>
+<td>Global Internet</td>
+<td>Teredo tunneling.</td>
+</tr>
+<tr>
+<td>2001:20::&#x2F;28</td>
+<td>2001:20::</td>
+<td>2001:2f:ffff:ffff:ffff:ffff:ffff:ffff</td>
+<td>2100</td>
+<td>Software</td>
+<td>ORCHIDv2</td>
+</tr>
+<tr>
+<td>2001:db8::&#x2F;32</td>
+<td>2001:db8::</td>
+<td>2001:db8:ffff:ffff:ffff:ffff:ffff:ffff</td>
+<td>296</td>
+<td>Documentation</td>
+<td>Addresses used in documentation and example source code.</td>
+</tr>
+<tr>
+<td>2002::&#x2F;16</td>
+<td>2002::</td>
+<td>2002:ffff:ffff:ffff:ffff:ffff:ffff:ffff</td>
+<td>2112</td>
+<td>Global Internet</td>
+<td>The 6to4 addressing scheme (now deprecated).</td>
+</tr>
+<tr>
+<td>fc00::&#x2F;7</td>
+<td>fc00::</td>
+<td>fdff:ffff:ffff:ffff:ffff:ffff:ffff:ffff</td>
+<td>2121</td>
+<td>Private network</td>
+<td>Unique local address.</td>
+</tr>
+<tr>
+<td>fe80::&#x2F;10</td>
+<td>fe80::</td>
+<td>febf:ffff:ffff:ffff:ffff:ffff:ffff:ffff</td>
+<td>2118</td>
+<td>Link</td>
+<td>Link-local address.</td>
+</tr>
+<tr>
+<td>ff00::&#x2F;8</td>
+<td>ff00::</td>
+<td>ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff</td>
+<td>2120</td>
+<td>Global Internet</td>
+<td>Multicast address.</td>
+</tr>
+</tbody></table>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://blog.hengshare.top/2023/03/27/%E5%B8%B8%E7%94%A8%E7%9A%84%E5%AD%90%E7%BD%91%E6%8E%A9%E7%A0%81/" data-id="clg7qc3kx001oucvx041t6g4w" data-title="常用的子网掩码" class="article-share-link">分享</a>
+      <a data-url="https://blog.hengshare.top/2023/03/27/%E5%B8%B8%E7%94%A8%E7%9A%84%E5%AD%90%E7%BD%91%E6%8E%A9%E7%A0%81/" data-id="clg7qc3kx001oucvx041t6g4w" data-title="常用的子网掩码、内网段" class="article-share-link">分享</a>
       
       
         <a href="/2023/03/27/%E5%B8%B8%E7%94%A8%E7%9A%84%E5%AD%90%E7%BD%91%E6%8E%A9%E7%A0%81/#comments" class="article-comment-link">
@@ -140,7 +520,7 @@
         </a>
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BF%90%E7%BB%B4/" rel="tag">运维</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BF%90%E7%BB%B4/" rel="tag">运维</a></li></ul>
 
     </footer>
   </div>
@@ -194,7 +574,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/" rel="tag">Android</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Css/" rel="tag">Css</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MQ/" rel="tag">MQ</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/chrome%E6%8F%92%E4%BB%B6/" rel="tag">chrome插件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">css</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/" rel="tag">html</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/k3s/" rel="tag">k3s</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kubernates/" rel="tag">kubernates</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/" rel="tag">maven</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mq/" rel="tag">mq</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/" rel="tag">mysql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/" rel="tag">nginx</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/picgo/" rel="tag">picgo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vmware/" rel="tag">vmware</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vscode/" rel="tag">vscode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zsh/" rel="tag">zsh</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6/" rel="tag">中间件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BA%A7%E7%BA%BF%E9%97%AE%E9%A2%98/" rel="tag">产线问题</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BB%A3%E7%90%86/" rel="tag">代理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%90%8D%E8%AF%8D%E8%A7%A3%E9%87%8A/" rel="tag">名词解释</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" rel="tag">基础知识</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%89%E5%85%A8/" rel="tag">安全</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E4%BD%9C%E6%80%BB%E7%BB%93/" rel="tag">工作总结</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag">工具</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/" rel="tag">开发工具</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%A5%E5%B8%B8%E9%9A%8F%E7%AC%94/" rel="tag">日常随笔</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%8B%E8%AF%95/" rel="tag">测试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%90%E7%BB%B4/" rel="tag">运维</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%80%86%E5%90%91/" rel="tag">逆向</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag">随笔</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%BB%91%E8%8B%B9%E6%9E%9C/" rel="tag">黑苹果</a><span class="tag-list-count">2</span></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/" rel="tag">Android</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Css/" rel="tag">Css</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MQ/" rel="tag">MQ</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MacOs/" rel="tag">MacOs</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/chrome%E6%8F%92%E4%BB%B6/" rel="tag">chrome插件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">css</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/" rel="tag">html</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/k3s/" rel="tag">k3s</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kubernates/" rel="tag">kubernates</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/" rel="tag">maven</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mq/" rel="tag">mq</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/" rel="tag">mysql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/" rel="tag">nginx</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/picgo/" rel="tag">picgo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vmware/" rel="tag">vmware</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vscode/" rel="tag">vscode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zsh/" rel="tag">zsh</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6/" rel="tag">中间件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BA%A7%E7%BA%BF%E9%97%AE%E9%A2%98/" rel="tag">产线问题</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BB%A3%E7%90%86/" rel="tag">代理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%90%8D%E8%AF%8D%E8%A7%A3%E9%87%8A/" rel="tag">名词解释</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" rel="tag">基础知识</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%89%E5%85%A8/" rel="tag">安全</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E4%BD%9C%E6%80%BB%E7%BB%93/" rel="tag">工作总结</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag">工具</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/" rel="tag">开发工具</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%A5%E5%B8%B8%E9%9A%8F%E7%AC%94/" rel="tag">日常随笔</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%8B%E8%AF%95/" rel="tag">测试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%90%E7%BB%B4/" rel="tag">运维</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%80%86%E5%90%91/" rel="tag">逆向</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag">随笔</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%BB%91%E8%8B%B9%E6%9E%9C/" rel="tag">黑苹果</a><span class="tag-list-count">4</span></li></ul>
     </div>
   </div>
 
@@ -247,7 +627,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/Css/" style="font-size: 10px;">Css</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/MQ/" style="font-size: 10px;">MQ</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/chrome%E6%8F%92%E4%BB%B6/" style="font-size: 10px;">chrome插件</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/k3s/" style="font-size: 17.5px;">k3s</a> <a href="/tags/kubernates/" style="font-size: 17.5px;">kubernates</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/mq/" style="font-size: 10px;">mq</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 15px;">nginx</a> <a href="/tags/picgo/" style="font-size: 10px;">picgo</a> <a href="/tags/vmware/" style="font-size: 10px;">vmware</a> <a href="/tags/vscode/" style="font-size: 10px;">vscode</a> <a href="/tags/zsh/" style="font-size: 10px;">zsh</a> <a href="/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6/" style="font-size: 10px;">中间件</a> <a href="/tags/%E4%BA%A7%E7%BA%BF%E9%97%AE%E9%A2%98/" style="font-size: 10px;">产线问题</a> <a href="/tags/%E4%BB%A3%E7%90%86/" style="font-size: 10px;">代理</a> <a href="/tags/%E5%90%8D%E8%AF%8D%E8%A7%A3%E9%87%8A/" style="font-size: 10px;">名词解释</a> <a href="/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" style="font-size: 12.5px;">基础知识</a> <a href="/tags/%E5%AE%89%E5%85%A8/" style="font-size: 10px;">安全</a> <a href="/tags/%E5%B7%A5%E4%BD%9C%E6%80%BB%E7%BB%93/" style="font-size: 10px;">工作总结</a> <a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 20px;">工具</a> <a href="/tags/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/" style="font-size: 12.5px;">开发工具</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 10px;">数据库</a> <a href="/tags/%E6%97%A5%E5%B8%B8%E9%9A%8F%E7%AC%94/" style="font-size: 15px;">日常随笔</a> <a href="/tags/%E6%B5%8B%E8%AF%95/" style="font-size: 10px;">测试</a> <a href="/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 10px;">网络</a> <a href="/tags/%E8%BF%90%E7%BB%B4/" style="font-size: 20px;">运维</a> <a href="/tags/%E9%80%86%E5%90%91/" style="font-size: 10px;">逆向</a> <a href="/tags/%E9%9A%8F%E7%AC%94/" style="font-size: 10px;">随笔</a> <a href="/tags/%E9%BB%91%E8%8B%B9%E6%9E%9C/" style="font-size: 12.5px;">黑苹果</a>
+      <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/Css/" style="font-size: 10px;">Css</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/MQ/" style="font-size: 10px;">MQ</a> <a href="/tags/MacOs/" style="font-size: 16px;">MacOs</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/chrome%E6%8F%92%E4%BB%B6/" style="font-size: 10px;">chrome插件</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/k3s/" style="font-size: 18px;">k3s</a> <a href="/tags/kubernates/" style="font-size: 18px;">kubernates</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/mq/" style="font-size: 10px;">mq</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 16px;">nginx</a> <a href="/tags/picgo/" style="font-size: 10px;">picgo</a> <a href="/tags/vmware/" style="font-size: 10px;">vmware</a> <a href="/tags/vscode/" style="font-size: 10px;">vscode</a> <a href="/tags/zsh/" style="font-size: 10px;">zsh</a> <a href="/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6/" style="font-size: 10px;">中间件</a> <a href="/tags/%E4%BA%A7%E7%BA%BF%E9%97%AE%E9%A2%98/" style="font-size: 12px;">产线问题</a> <a href="/tags/%E4%BB%A3%E7%90%86/" style="font-size: 10px;">代理</a> <a href="/tags/%E5%90%8D%E8%AF%8D%E8%A7%A3%E9%87%8A/" style="font-size: 10px;">名词解释</a> <a href="/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" style="font-size: 12px;">基础知识</a> <a href="/tags/%E5%AE%89%E5%85%A8/" style="font-size: 10px;">安全</a> <a href="/tags/%E5%B7%A5%E4%BD%9C%E6%80%BB%E7%BB%93/" style="font-size: 10px;">工作总结</a> <a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 20px;">工具</a> <a href="/tags/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/" style="font-size: 12px;">开发工具</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 10px;">数据库</a> <a href="/tags/%E6%97%A5%E5%B8%B8%E9%9A%8F%E7%AC%94/" style="font-size: 14px;">日常随笔</a> <a href="/tags/%E6%B5%8B%E8%AF%95/" style="font-size: 10px;">测试</a> <a href="/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 12px;">网络</a> <a href="/tags/%E8%BF%90%E7%BB%B4/" style="font-size: 20px;">运维</a> <a href="/tags/%E9%80%86%E5%90%91/" style="font-size: 10px;">逆向</a> <a href="/tags/%E9%9A%8F%E7%AC%94/" style="font-size: 12px;">随笔</a> <a href="/tags/%E9%BB%91%E8%8B%B9%E6%9E%9C/" style="font-size: 16px;">黑苹果</a>
     </div>
   </div>
 

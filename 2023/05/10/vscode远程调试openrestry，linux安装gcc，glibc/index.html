@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FGVBL4CYKC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-FGVBL4CYKC');
+</script>
+<!-- End Google Analytics -->
+
+  
+  <title>vscode远程调试openrestry，linux安装gcc，glibc | StivenYang</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta property="og:type" content="article">
+<meta property="og:title" content="vscode远程调试openrestry，linux安装gcc，glibc">
+<meta property="og:url" content="https://blog.hengshare.top/2023/05/10/vscode%E8%BF%9C%E7%A8%8B%E8%B0%83%E8%AF%95openrestry%EF%BC%8Clinux%E5%AE%89%E8%A3%85gcc%EF%BC%8Cglibc/index.html">
+<meta property="og:site_name" content="StivenYang">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2023/05/10/dgCVtB28LsjpZIy.png">
+<meta property="og:image" content="https://s2.loli.net/2023/05/10/2Kl3kD8V9HXTprB.png">
+<meta property="og:image" content="https://s2.loli.net/2023/05/10/lw8O6vyXSBRtpUd.png">
+<meta property="og:image" content="https://s2.loli.net/2023/05/10/PdztEBOcXymUej1.png">
+<meta property="article:published_time" content="2023-05-10T03:45:38.000Z">
+<meta property="article:modified_time" content="2023-09-27T03:07:42.562Z">
+<meta property="article:author" content="StivenYang">
+<meta property="article:tag" content="工具">
+<meta property="article:tag" content="linux">
+<meta property="article:tag" content="vscode">
+<meta property="article:tag" content="lua">
+<meta property="article:tag" content="openrestry">
+<meta property="article:tag" content="gcc">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2023/05/10/dgCVtB28LsjpZIy.png">
+  
+    <link rel="alternate" href="/atom.xml" title="StivenYang" type="application/atom+xml">
+  
+  
+    <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+    <link rel="manifest" href="images/site.webmanifest">
+    <!-- <link rel="shortcut icon" href="/images/favicon.png"> -->
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">StivenYang</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">StivenYang的个人网站</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">主页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="/tags/%E5%AE%89%E5%85%A8/">安全</a>
+        
+          <a class="main-nav-link" href="/%E5%85%B3%E4%BA%8E">关于</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS 订阅"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://blog.hengshare.top"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-vscode远程调试openrestry，linux安装gcc，glibc" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/05/10/vscode%E8%BF%9C%E7%A8%8B%E8%B0%83%E8%AF%95openrestry%EF%BC%8Clinux%E5%AE%89%E8%A3%85gcc%EF%BC%8Cglibc/" class="article-date">
+  <time class="dt-published" datetime="2023-05-10T03:45:38.000Z" itemprop="datePublished">2023-05-10</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      vscode远程调试openrestry，linux安装gcc，glibc
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+          <div id="toc" class="toc-article">
+          <strong class="toc-title">文章目录</strong>
+          <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-number">1.</span> <span class="toc-text">参考资料</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%97%AE%E9%A2%98"><span class="toc-number">2.</span> <span class="toc-text">问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="toc-number">3.</span> <span class="toc-text">解决方案</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85vscode%E6%8F%92%E4%BB%B6"><span class="toc-number">3.1.</span> <span class="toc-text">安装vscode插件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AEvscode%E7%9A%84debug%E9%85%8D%E7%BD%AE"><span class="toc-number">3.2.</span> <span class="toc-text">设置vscode的debug配置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A2%B0%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98"><span class="toc-number">4.</span> <span class="toc-text">碰到的问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%BE%E4%B8%8D%E5%88%B0-GLIBCXX-3-4-29-%EF%BC%9A"><span class="toc-number">4.1.</span> <span class="toc-text">找不到 GLIBCXX_3.4.29 ：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%80%E7%BB%88%E8%A7%A3%E5%86%B3%EF%BC%9A%E8%87%AA%E5%B7%B1%E7%BC%96%E8%AF%91emmy-core%E8%B0%83%E8%AF%95%E5%99%A8"><span class="toc-number">4.2.</span> <span class="toc-text">最终解决：自己编译emmy-core调试器</span></a></li></ol></li></ol>
+        </div>
+        
+        <h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p>centos编译安装gcc 10：<a target="_blank" rel="noopener" href="https://xujinzh.github.io/2021/02/03/centos-install-gcc/">https://xujinzh.github.io/2021/02/03/centos-install-gcc/</a></p>
+<p>CentOs下安装gcc&#x2F;g++&#x2F;gdb的方法：<a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/beta/article/1720891">https://cloud.tencent.com/developer/beta/article/1720891</a></p>
+<p>vscode调试插件安装：<a target="_blank" rel="noopener" href="https://vscode-debug-specs.github.io/cpp/">https://vscode-debug-specs.github.io/cpp/</a></p>
+<p>glibc升级到：<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/f4d603967e1d">https://www.jianshu.com/p/f4d603967e1d</a></p>
+<p>查看gcc对应版本对应的库文件版本：<a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/56781513/understanding-the-gcc-version-and-the-glibc-glibcxx-versions-in-more-detail">https://stackoverflow.com/questions/56781513/understanding-the-gcc-version-and-the-glibc-glibcxx-versions-in-more-detail</a></p>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>调试lua脚本的时候，需要使用gdb进行debug。</p>
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>要按照上面的步骤来安装对应的软件，主要分以下几步：</p>
+<h3 id="安装vscode插件"><a href="#安装vscode插件" class="headerlink" title="安装vscode插件"></a>安装vscode插件</h3><ol>
+<li>安装 c&#x2F;c++插件</li>
+<li>安装 emmylua插件</li>
+</ol>
+<h3 id="设置vscode的debug配置"><a href="#设置vscode的debug配置" class="headerlink" title="设置vscode的debug配置"></a>设置vscode的debug配置</h3><p>里面的路径记得修改成自己的</p>
+<ol>
+<li>launch.json</li>
+</ol>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="comment">// 使用 IntelliSense 了解相关属性。 </span></span><br><span class="line">    <span class="comment">// 悬停以查看现有属性的描述。</span></span><br><span class="line">    <span class="comment">// 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387</span></span><br><span class="line">    <span class="attr">&quot;version&quot;</span><span class="punctuation">:</span> <span class="string">&quot;0.2.0&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;configurations&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">        <span class="punctuation">&#123;</span></span><br><span class="line">            <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;emmylua_new&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;request&quot;</span><span class="punctuation">:</span> <span class="string">&quot;launch&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;EmmyLua New Debug&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;host&quot;</span><span class="punctuation">:</span> <span class="string">&quot;localhost&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;port&quot;</span><span class="punctuation">:</span> <span class="number">9966</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;ext&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">                <span class="string">&quot;.lua&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="string">&quot;.lua.txt&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="string">&quot;.lua.bytes&quot;</span></span><br><span class="line">            <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;ideConnectDebugger&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">false</span></span></span><br><span class="line">        <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="punctuation">&#123;</span></span><br><span class="line">            <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Open Resty&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;cppdbg&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;request&quot;</span><span class="punctuation">:</span> <span class="string">&quot;launch&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;program&quot;</span><span class="punctuation">:</span> <span class="string">&quot;/usr/local/openresty/bin/openresty&quot;</span><span class="punctuation">,</span><span class="comment">//需要配置</span></span><br><span class="line">            <span class="attr">&quot;cwd&quot;</span><span class="punctuation">:</span> <span class="string">&quot;/usr/local/openresty/nginx/html&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;args&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="string">&quot;-c&quot;</span><span class="punctuation">,</span> <span class="string">&quot;/usr/local/openresty/nginx/conf/nginx.conf&quot;</span><span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;stopAtEntry&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">false</span></span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;environment&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;externalConsole&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">false</span></span><span class="punctuation">,</span><span class="comment">//可以配置，这边不能搞成true</span></span><br><span class="line">            <span class="attr">&quot;MIMode&quot;</span><span class="punctuation">:</span> <span class="string">&quot;gdb&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;miDebuggerPath&quot;</span><span class="punctuation">:</span> <span class="string">&quot;/usr/bin/gdb&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="punctuation">&#125;</span></span><br><span class="line">    <span class="punctuation">]</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>nginx.conf 的http节点下面添加emmylua初始化的文件路径，这样：</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">#user  nobody;</span><br><span class="line">worker_processes  1;</span><br><span class="line"></span><br><span class="line">events &#123;</span><br><span class="line">    worker_connections  1024;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># ！！！这两个不能少，远程调试的时候，openrestry进程不能后台运行，不然debug断不下来</span><br><span class="line">daemon off;  </span><br><span class="line">master_process off;</span><br><span class="line"></span><br><span class="line">http &#123;</span><br><span class="line">    include       mime.types;</span><br><span class="line">    default_type  application/octet-stream;</span><br><span class="line"></span><br><span class="line">    # ！！！这里是引入一个lua脚本，目的是启动一个emmy_core调试器，监听端口为上面配置里面的9966</span><br><span class="line">    init_by_lua_file  /usr/local/openresty/nginx/lua/init.lua;</span><br><span class="line"></span><br><span class="line">    #log_format  main  &#x27;$remote_addr - $remote_user [$time_local] &quot;$request&quot; &#x27;</span><br><span class="line">    #                  &#x27;$status $body_bytes_sent &quot;$http_referer&quot; &#x27;</span><br><span class="line">    #                  &#x27;&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;&#x27;;</span><br><span class="line"></span><br><span class="line">    #access_log  logs/access.log  main;</span><br><span class="line"></span><br><span class="line">    sendfile        on;</span><br><span class="line">    #tcp_nopush     on;</span><br><span class="line"></span><br><span class="line">    #keepalive_timeout  0;</span><br><span class="line">    keepalive_timeout  65;</span><br><span class="line"></span><br><span class="line">    #gzip  on;</span><br><span class="line"></span><br><span class="line">    server &#123;</span><br><span class="line">        listen       80;</span><br><span class="line">        server_name  localhost;</span><br><span class="line"></span><br><span class="line">        #charset koi8-r;</span><br><span class="line"></span><br><span class="line">        #access_log  logs/host.access.log  main;</span><br><span class="line"></span><br><span class="line">        location / &#123;</span><br><span class="line">            root   html;</span><br><span class="line">            index  index.html index.htm;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        location = /example &#123;</span><br><span class="line">         # 这里可以随便写lua脚本了。调试器会针对lua后缀动态调试</span><br><span class="line">            rewrite_by_lua_file /usr/local/openresty/nginx/lua/auth.lua;</span><br><span class="line">            content_by_lua_file /usr/local/openresty/nginx/lua/auth.lua;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        error_page   500 502 503 504  /50x.html;</span><br><span class="line">        location = /50x.html &#123;</span><br><span class="line">            root   html;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<ol start="3">
+<li>init.lua 文件的内容长这样：<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">package</span>.<span class="built_in">cpath</span> = <span class="built_in">package</span>.<span class="built_in">cpath</span> .. <span class="string">&quot;;/root/.vscode-server/extensions/tangzx.emmylua-0.5.13/debugger/emmy/linux/emmy_core.so&quot;</span></span><br><span class="line"><span class="comment">-- 这边引入了emmy_core,我们重新编译的就是这个</span></span><br><span class="line"><span class="keyword">local</span> dbg = <span class="built_in">require</span>(<span class="string">&quot;emmy_core&quot;</span>)</span><br><span class="line"><span class="comment">-- 连接到emmy debugger监听的端口</span></span><br><span class="line">dbg.tcpConnect(<span class="string">&quot;localhost&quot;</span>, <span class="number">9966</span>)</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>4 调试</p>
+<p>先启动emmylua，再启动openrestry</p>
+<h2 id="碰到的问题"><a href="#碰到的问题" class="headerlink" title="碰到的问题"></a>碰到的问题</h2><h3 id="找不到-GLIBCXX-3-4-29-："><a href="#找不到-GLIBCXX-3-4-29-：" class="headerlink" title="找不到 GLIBCXX_3.4.29 ："></a>找不到 <code>GLIBCXX_3.4.29</code> ：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">nginx: [error] init_by_lua_file error: error loading module &#x27;emmy_core&#x27; from file &#x27;/root/.vscode-server/extensions/tangzx.emmylua-0.5.13/debugger/emmy/linux/emmy_core.so&#x27;:</span><br><span class="line">        /lib64/libstdc++.so.6: version `GLIBCXX_3.4.29&#x27; not found (required by /root/.vscode-server/extensions/tangzx.emmylua-0.5.13/debugger/emmy/linux/emmy_core.so)</span><br><span class="line">stack traceback:</span><br><span class="line">        [C]: at 0x7ffff7fce9f0</span><br><span class="line">        [C]: in function &#x27;require&#x27;</span><br><span class="line">        /usr/local/openresty/nginx/lua/init.lua:3: in main chunk</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://s2.loli.net/2023/05/10/dgCVtB28LsjpZIy.png" alt="20230510154621"></p>
+<p>查看libc的已安装版本：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">strings /usr/lib64/libstdc++.so.6 | grep GLIBCXX</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://s2.loli.net/2023/05/10/2Kl3kD8V9HXTprB.png" alt="20230510154012"></p>
+<p>解决办法: 就是升级gcc版本，安装新的glibc库了。</p>
+<ol>
+<li>远程服务器编译比较新的版本的gcc</li>
+</ol>
+<p>安装的gcc版本尽量新一些，保证emmylua依赖的库文件在系统中可以找到。我这里选择安装了10版本的。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">yum -y install wget bzip2 gcc gcc-c++ glibc-headers</span><br><span class="line"></span><br><span class="line">wget -c http://ftp.gnu.org/gnu/gcc/gcc-10.1.0/gcc-10.1.0.tar.gz</span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> /root/gcc-10.1.0</span><br><span class="line"></span><br><span class="line"><span class="comment"># 下载依赖包</span></span><br><span class="line">./contrib/download_prerequisites</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建文件夹，存储编译中产生的临时文件</span></span><br><span class="line"><span class="built_in">mkdir</span> build</span><br><span class="line"><span class="built_in">cd</span> build/</span><br><span class="line"></span><br><span class="line"><span class="comment"># 配置编译</span></span><br><span class="line">../configure --prefix=/usr/local/gcc-10.1.0 --enable-bootstrap --enable-checking=release --enable-languages=c,c++ --disable-multilib</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进行编译，只能进程数能够加速（这一步花的时间比较多，可以先干点其他事情）</span></span><br><span class="line">make -j 8</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装，大约3-5分钟左右</span></span><br><span class="line">make install</span><br><span class="line"></span><br><span class="line"><span class="comment"># 配置为默认 gcc</span></span><br><span class="line"><span class="built_in">echo</span> -e <span class="string">&#x27;\nexport PATH=/usr/local/gcc-10.1.0/bin:$PATH\n&#x27;</span> &gt;&gt; /etc/profile.d/gcc.sh &amp;&amp; <span class="built_in">source</span> /etc/profile.d/gcc.sh</span><br><span class="line"><span class="built_in">ln</span> -sv /usr/local/gcc-10.1.0/include/ /usr/include/gcc</span><br><span class="line"></span><br><span class="line"><span class="comment"># 配置生效</span></span><br><span class="line">ldconfig -v</span><br><span class="line"></span><br><span class="line"><span class="comment"># 导出验证</span></span><br><span class="line">ldconfig -p | grep gcc</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看 gcc 版本号</span></span><br><span class="line">gcc -v</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://s2.loli.net/2023/05/10/lw8O6vyXSBRtpUd.png" alt="20230510145208"></p>
+<p><img src="https://s2.loli.net/2023/05/10/PdztEBOcXymUej1.png" alt="20230510144020"></p>
+<ol start="2">
+<li>升级完gcc之后，安装新版本的glibc：</li>
+</ol>
+<p>在CentOS中安装glibc可以通过以下步骤完成：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1. 更新系统：</span></span><br><span class="line">sudo yum update</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. 安装依赖包：</span></span><br><span class="line">sudo yum install -y wget tar gzip make gcc gcc-c++</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3. 下载glibc源代码包，例如下载最新版本的glibc 2.33：</span></span><br><span class="line">sudo <span class="built_in">mkdir</span> /opt/glibc-2.33</span><br><span class="line"><span class="built_in">cd</span> /opt/glibc-2.33</span><br><span class="line">sudo wget http://ftp.gnu.org/gnu/glibc/glibc-2.33.tar.gz</span><br><span class="line"></span><br><span class="line"><span class="comment"># 4. 解压glibc源代码包，并进入解压后的目录。</span></span><br><span class="line">sudo tar zxvf glibc-2.33.tar.gz</span><br><span class="line"><span class="built_in">cd</span> glibc-2.33</span><br><span class="line"></span><br><span class="line"><span class="comment"># 5. 创建编译目录：</span></span><br><span class="line"><span class="built_in">mkdir</span> build</span><br><span class="line"><span class="built_in">cd</span> build</span><br><span class="line"></span><br><span class="line"><span class="comment"># 6. 在编译目录中使用cmake生成Makefile文件：</span></span><br><span class="line">sudo ../configure --prefix=/usr</span><br><span class="line"></span><br><span class="line"><span class="comment"># 7. 继续运行make命令进行编译:</span></span><br><span class="line">sudo make</span><br><span class="line"></span><br><span class="line"><span class="comment"># 8. 提权并安装glibc:</span></span><br><span class="line">sudo su</span><br><span class="line">make install</span><br><span class="line"></span><br><span class="line"><span class="comment"># 9. 确认已经安装成功, 可以查看当前安装的glibc版本号：</span></span><br><span class="line">ldd --version</span><br></pre></td></tr></table></figure>
+
+<p>提示：由于glibc是C语言标准库，是整个系统的基础，因此升级glibc需要谨慎。不正确的操作可能会导致系统软件出现异常甚至无法启动的情况。建议在操作之前备份数据和系统镜像并做好相关风险评估和恢复措施。</p>
+<h3 id="最终解决：自己编译emmy-core调试器"><a href="#最终解决：自己编译emmy-core调试器" class="headerlink" title="最终解决：自己编译emmy-core调试器"></a>最终解决：自己编译emmy-core调试器</h3><p>升级gcc之后，依旧报其他库找不到的错误。只能拿源码，自己编译一份适合我的机器的版本了。</p>
+<p>上面操作都做了之后，发现10.1版本的gcc依旧没有新的 GLIBCXX_3.4.29。如果升级最新的gcc编译器的话，又得大半个小时，而且不一定能用。所以这里直接采用编译 emmylua调试器 的源代码</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="built_in">cd</span> /root</span><br><span class="line"></span><br><span class="line">git <span class="built_in">clone</span> https://github.com/EmmyLua/EmmyLuaDebugger.git</span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> EmmyLuaDebugger/</span><br><span class="line"></span><br><span class="line">cmake .</span><br><span class="line"></span><br><span class="line">make &amp;&amp; make install</span><br><span class="line"></span><br><span class="line"><span class="comment"># 这个目录在vscode中安装了扩展后就会有</span></span><br><span class="line"><span class="built_in">mv</span> /root/.vscode-server/extensions/tangzx.emmylua-0.5.3/debugger/emmy/linux/emmy_core.so /root/.vscode-server/extensions/tangzx.emmylua-0.5.3/debugger/emmy/linux/emmy_core.so.bak</span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> emmy_core/</span><br><span class="line"></span><br><span class="line"><span class="built_in">cp</span> emmy_core.so /root/.vscode-server/extensions/tangzx.emmylua-0.5.3/debugger/emmy/linux</span><br></pre></td></tr></table></figure>
+
+<p>ps： 上面在make的时候，如果发现cmake版本太低，可以直接下载一个linux版本的最新cmake工具，不用自己编译，下载下来直接用新版本cmake执行操作。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://blog.hengshare.top/2023/05/10/vscode%E8%BF%9C%E7%A8%8B%E8%B0%83%E8%AF%95openrestry%EF%BC%8Clinux%E5%AE%89%E8%A3%85gcc%EF%BC%8Cglibc/" data-id="cln162dl3002pw04ed0o2bjdw" data-title="vscode远程调试openrestry，linux安装gcc，glibc" class="article-share-link">分享</a>
+      
+      
+        <a href="/2023/05/10/vscode%E8%BF%9C%E7%A8%8B%E8%B0%83%E8%AF%95openrestry%EF%BC%8Clinux%E5%AE%89%E8%A3%85gcc%EF%BC%8Cglibc/#comments" class="article-comment-link">
+          <span class="post-comments-count valine-comment-count" data-xid="/2023/05/10/vscode%E8%BF%9C%E7%A8%8B%E8%B0%83%E8%AF%95openrestry%EF%BC%8Clinux%E5%AE%89%E8%A3%85gcc%EF%BC%8Cglibc/" itemprop="commentCount"></span>
+          留言
+        </a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gcc/" rel="tag">gcc</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/lua/" rel="tag">lua</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/openrestry/" rel="tag">openrestry</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vscode/" rel="tag">vscode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag">工具</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2023/05/10/linux%E6%B5%81%E9%87%8F%E7%9B%91%E6%8E%A7%E5%B7%A5%E5%85%B7/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          linux流量监控工具-nload
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2023/05/09/idea%E8%BF%9C%E7%A8%8B%E5%BC%80%E5%8F%91/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">idea、vscode远程开发调试</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+  <section id="comments" class="vcomment">
+
+  </section>
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">九月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/06/">六月 2023</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">五月 2023</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">四月 2023</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">三月 2023</a><span class="archive-list-count">36</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI/" rel="tag">AI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/" rel="tag">Android</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MQ/" rel="tag">MQ</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MacOs/" rel="tag">MacOs</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/chrome%E6%8F%92%E4%BB%B6/" rel="tag">chrome插件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">css</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gcc/" rel="tag">gcc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/go/" rel="tag">go</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/" rel="tag">html</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/k3s/" rel="tag">k3s</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kubernates/" rel="tag">kubernates</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lua/" rel="tag">lua</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/" rel="tag">maven</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mq/" rel="tag">mq</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/" rel="tag">mysql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/" rel="tag">nginx</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openrestry/" rel="tag">openrestry</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/picgo/" rel="tag">picgo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vmware/" rel="tag">vmware</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vscode/" rel="tag">vscode</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zsh/" rel="tag">zsh</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6/" rel="tag">中间件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BA%A7%E7%BA%BF%E9%97%AE%E9%A2%98/" rel="tag">产线问题</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BB%A3%E7%90%86/" rel="tag">代理</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%90%8D%E8%AF%8D%E8%A7%A3%E9%87%8A/" rel="tag">名词解释</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%90%8E%E7%AB%AF/" rel="tag">后端</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" rel="tag">基础知识</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%89%E5%85%A8/" rel="tag">安全</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E4%BD%9C%E6%80%BB%E7%BB%93/" rel="tag">工作总结</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag">工具</a><span class="tag-list-count">19</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/" rel="tag">开发工具</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%A5%E5%B8%B8%E9%9A%8F%E7%AC%94/" rel="tag">日常随笔</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%8B%E8%AF%95/" rel="tag">测试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%90%E7%BB%B4/" rel="tag">运维</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%80%86%E5%90%91/" rel="tag">逆向</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag">随笔</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%BB%91%E8%8B%B9%E6%9E%9C/" rel="tag">黑苹果</a><span class="tag-list-count">7</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/09/27/springboot%E4%B8%ADwebsocket%E4%BD%BF%E7%94%A8/">springboot中websocket使用</a>
+          </li>
+        
+          <li>
+            <a href="/2023/06/16/%E5%9B%BE%E5%83%8F-jpg-png%E7%AD%89%E5%9B%BE%E7%89%87%E6%A0%BC%E5%BC%8F%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB/">图像-jpg,png等图片格式有什么区别</a>
+          </li>
+        
+          <li>
+            <a href="/2023/06/08/consul-%E7%AE%80%E5%8D%95%E4%BB%8B%E7%BB%8D/">consul-简单介绍</a>
+          </li>
+        
+          <li>
+            <a href="/2023/06/02/go-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">go-学习笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2023/06/02/go-%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Go-Modules%E7%9A%84go-mod%E4%B8%8Ego-sum/">go-深入理解Go Modules的go.mod与go.sum</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/31/ffplay%E5%8F%82%E6%95%B0%E4%BB%A5%E5%8F%8A%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">ffplay参数以及常用命令</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/31/ffprobe%E5%8F%82%E6%95%B0%E4%BB%A5%E5%8F%8A%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">ffprobe参数以及常用命令</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/31/ffmpeg%E5%8F%82%E6%95%B0%E4%BB%A5%E5%8F%8A%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">ffmpeg参数以及常用命令</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/AI/" style="font-size: 10px;">AI</a> <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/MQ/" style="font-size: 10px;">MQ</a> <a href="/tags/MacOs/" style="font-size: 16.25px;">MacOs</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/chrome%E6%8F%92%E4%BB%B6/" style="font-size: 10px;">chrome插件</a> <a href="/tags/css/" style="font-size: 11.25px;">css</a> <a href="/tags/gcc/" style="font-size: 10px;">gcc</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/go/" style="font-size: 11.25px;">go</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/k3s/" style="font-size: 17.5px;">k3s</a> <a href="/tags/kubernates/" style="font-size: 17.5px;">kubernates</a> <a href="/tags/linux/" style="font-size: 16.25px;">linux</a> <a href="/tags/lua/" style="font-size: 10px;">lua</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/mq/" style="font-size: 10px;">mq</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 13.75px;">nginx</a> <a href="/tags/openrestry/" style="font-size: 11.25px;">openrestry</a> <a href="/tags/picgo/" style="font-size: 10px;">picgo</a> <a href="/tags/vmware/" style="font-size: 10px;">vmware</a> <a href="/tags/vscode/" style="font-size: 12.5px;">vscode</a> <a href="/tags/zsh/" style="font-size: 10px;">zsh</a> <a href="/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6/" style="font-size: 10px;">中间件</a> <a href="/tags/%E4%BA%A7%E7%BA%BF%E9%97%AE%E9%A2%98/" style="font-size: 11.25px;">产线问题</a> <a href="/tags/%E4%BB%A3%E7%90%86/" style="font-size: 11.25px;">代理</a> <a href="/tags/%E5%90%8D%E8%AF%8D%E8%A7%A3%E9%87%8A/" style="font-size: 10px;">名词解释</a> <a href="/tags/%E5%90%8E%E7%AB%AF/" style="font-size: 10px;">后端</a> <a href="/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" style="font-size: 11.25px;">基础知识</a> <a href="/tags/%E5%AE%89%E5%85%A8/" style="font-size: 10px;">安全</a> <a href="/tags/%E5%B7%A5%E4%BD%9C%E6%80%BB%E7%BB%93/" style="font-size: 10px;">工作总结</a> <a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 20px;">工具</a> <a href="/tags/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/" style="font-size: 11.25px;">开发工具</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 10px;">数据库</a> <a href="/tags/%E6%97%A5%E5%B8%B8%E9%9A%8F%E7%AC%94/" style="font-size: 12.5px;">日常随笔</a> <a href="/tags/%E6%B5%8B%E8%AF%95/" style="font-size: 10px;">测试</a> <a href="/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 15px;">网络</a> <a href="/tags/%E8%BF%90%E7%BB%B4/" style="font-size: 18.75px;">运维</a> <a href="/tags/%E9%80%86%E5%90%91/" style="font-size: 10px;">逆向</a> <a href="/tags/%E9%9A%8F%E7%AC%94/" style="font-size: 11.25px;">随笔</a> <a href="/tags/%E9%BB%91%E8%8B%B9%E6%9E%9C/" style="font-size: 17.5px;">黑苹果</a>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+        <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a></br>
+All website licensed under <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a></br>
+      
+      &copy; 2023 StivenYang<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/tags/%E5%AE%89%E5%85%A8/" class="mobile-nav-link">安全</a>
+  
+    <a href="/%E5%85%B3%E4%BA%8E" class="mobile-nav-link">关于</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js"></script>
+
+<script>
+    var GUEST_INFO = ['nick','mail','link'];
+    var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+        return GUEST_INFO.indexOf(item) > -1
+    });
+    var notify = 'true' == true;
+    var verify = 'false' == true;
+    new Valine({
+        el: '.vcomment',
+        notify: notify,
+        verify: verify,
+        appId: "WZFGfb3fsFijmCwSr5V1g1QW-gzGzoHsz",
+        appKey: "IOaNIwfFDHG22j4kkrNX52Cw",
+        placeholder: "留言",
+        pageSize:'10',
+        avatar:'mm',
+        lang:'zh-cn'
+    });
+</script>
+
+  </div>
+</body>
+</html>

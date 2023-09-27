@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FGVBL4CYKC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-FGVBL4CYKC');
+</script>
+<!-- End Google Analytics -->
+
+  
+  <title>k8s-pv和pvc | StivenYang</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta property="og:type" content="article">
+<meta property="og:title" content="k8s-pv和pvc">
+<meta property="og:url" content="https://blog.hengshare.top/2023/03/27/k8s-pv%E5%92%8Cpvc/index.html">
+<meta property="og:site_name" content="StivenYang">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-03-27T04:17:23.000Z">
+<meta property="article:modified_time" content="2023-09-27T03:07:42.556Z">
+<meta property="article:author" content="StivenYang">
+<meta property="article:tag" content="运维">
+<meta property="article:tag" content="kubernates">
+<meta property="article:tag" content="k3s">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="StivenYang" type="application/atom+xml">
+  
+  
+    <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+    <link rel="manifest" href="images/site.webmanifest">
+    <!-- <link rel="shortcut icon" href="/images/favicon.png"> -->
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">StivenYang</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">StivenYang的个人网站</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">主页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="/tags/%E5%AE%89%E5%85%A8/">安全</a>
+        
+          <a class="main-nav-link" href="/%E5%85%B3%E4%BA%8E">关于</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS 订阅"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://blog.hengshare.top"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-k8s-pv和pvc" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/03/27/k8s-pv%E5%92%8Cpvc/" class="article-date">
+  <time class="dt-published" datetime="2023-03-27T04:17:23.000Z" itemprop="datePublished">2023-03-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      k8s-pv和pvc
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+          <div id="toc" class="toc-article">
+          <strong class="toc-title">文章目录</strong>
+          <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%A4%E8%AF%86PV-x2F-PVC-x2F-StorageClass"><span class="toc-number">1.</span> <span class="toc-text">认识PV&#x2F;PVC&#x2F;StorageClass</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.1.</span> <span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="toc-number">1.2.</span> <span class="toc-text">生命周期</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BE%9B%E5%BA%94%E5%87%86%E5%A4%87Provisioning"><span class="toc-number">1.2.1.</span> <span class="toc-text">供应准备Provisioning</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%91%E5%AE%9ABinding"><span class="toc-number">1.2.2.</span> <span class="toc-text">绑定Binding</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8Using"><span class="toc-number">1.2.3.</span> <span class="toc-text">使用Using</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%87%8A%E6%94%BEReleasing"><span class="toc-number">1.2.4.</span> <span class="toc-text">释放Releasing</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9B%9E%E6%94%B6Recycling"><span class="toc-number">1.2.5.</span> <span class="toc-text">回收Recycling</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PV%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.3.</span> <span class="toc-text">PV类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PV%E5%8D%B7%E9%98%B6%E6%AE%B5%E7%8A%B6%E6%80%81"><span class="toc-number">1.4.</span> <span class="toc-text">PV卷阶段状态</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%BC%94%E7%A4%BA%EF%BC%9A%E5%88%9B%E5%BB%BAPV"><span class="toc-number">2.</span> <span class="toc-text">演示：创建PV</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%86%E5%A4%87nfs%E6%9C%8D%E5%8A%A1"><span class="toc-number">2.1.</span> <span class="toc-text">准备nfs服务</span></a></li></ol></li></ol>
+        </div>
+        
+        <h2 id="认识PV-x2F-PVC-x2F-StorageClass"><a href="#认识PV-x2F-PVC-x2F-StorageClass" class="headerlink" title="认识PV&#x2F;PVC&#x2F;StorageClass"></a>认识PV&#x2F;PVC&#x2F;StorageClass</h2><h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><p>管理存储是管理计算的一个明显问题。该PersistentVolume子系统为用户和管理员提供了一个API，用于抽象如何根据消费方式提供存储的详细信息。为此，我们引入了两个新的API资源：PersistentVolume和PersistentVolumeClaim</p>
+<p>PersistentVolume（PV）是集群中由管理员配置的一段网络存储。 它是集群中的资源，就像节点是集群资源一样。 PV是容量插件，如Volumes，但其生命周期独立于使用PV的任何单个pod。 此API对象捕获存储实现的详细信息，包括NFS，iSCSI或特定于云提供程序的存储系统。</p>
+<p>PersistentVolumeClaim（PVC）是由用户进行存储的请求。 它类似于pod。 Pod消耗节点资源，PVC消耗PV资源。Pod可以请求特定级别的资源（CPU和内存）。声明可以请求特定的大小和访问模式（例如，可以一次读&#x2F;写或多次只读）。</p>
+<p>虽然PersistentVolumeClaims允许用户使用抽象存储资源，但是PersistentVolumes对于不同的问题，用户通常需要具有不同属性（例如性能）。群集管理员需要能够提供各种PersistentVolumes不同的方式，而不仅仅是大小和访问模式，而不会让用户了解这些卷的实现方式。对于这些需求，引入StorageClass 资源。</p>
+<p>StorageClass为管理员提供了一种描述他们提供的存储的“类”的方法。 不同的类可能映射到服务质量级别，或备份策略，或者由群集管理员确定的任意策略。 Kubernetes本身对于什么类别代表是不言而喻的。 这个概念有时在其他存储系统中称为“配置文件”。</p>
+<p>PVC和PV是一一对应的。</p>
+<h3 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h3><p>PV是群集中的资源。PVC是对这些资源的请求，并且还充当对资源的检查。PV和PVC之间的相互作用遵循以下生命周期：</p>
+<p><code>Provisioning ——-&gt; Binding ——–&gt;Using——&gt;Releasing——&gt;Recycling</code></p>
+<h4 id="供应准备Provisioning"><a href="#供应准备Provisioning" class="headerlink" title="供应准备Provisioning"></a>供应准备Provisioning</h4><p>通过集群外的存储系统或者云平台来提供存储持久化支持。</p>
+<ul>
+<li>静态提供Static：集群管理员创建多个PV。 它们携带可供集群用户使用的真实存储的详细信息。 它们存在于Kubernetes API中，可用于消费</li>
+<li>动态提供Dynamic：当管理员创建的静态PV都不匹配用户的PersistentVolumeClaim时，集群可能会尝试为PVC动态配置卷。 此配置基于StorageClasses：PVC必须请求一个类，并且管理员必须已创建并配置该类才能进行动态配置。 要求该类的声明有效地为自己禁用动态配置。</li>
+</ul>
+<h4 id="绑定Binding"><a href="#绑定Binding" class="headerlink" title="绑定Binding"></a>绑定Binding</h4><p>用户创建pvc并指定需要的资源和访问模式。在找到可用pv之前，pvc会保持未绑定状态。</p>
+<h4 id="使用Using"><a href="#使用Using" class="headerlink" title="使用Using"></a>使用Using</h4><p>用户可在pod中像volume一样使用pvc。</p>
+<h4 id="释放Releasing"><a href="#释放Releasing" class="headerlink" title="释放Releasing"></a>释放Releasing</h4><p>用户删除pvc来回收存储资源，pv将变成“released”状态。由于还保留着之前的数据，这些数据需要根据不同的策略来处理，否则这些存储资源无法被其他pvc使用。</p>
+<h4 id="回收Recycling"><a href="#回收Recycling" class="headerlink" title="回收Recycling"></a>回收Recycling</h4><p>pv可以设置三种回收策略：保留（Retain），回收（Recycle）和删除（Delete）</p>
+<ul>
+<li>保留策略：允许人工处理保留的数据。</li>
+<li>删除策略：将删除pv和外部关联的存储资源，需要插件支持。</li>
+<li>回收策略：将执行清除操作，之后可以被新的pvc使用，需要插件支持。</li>
+</ul>
+<p>注：目前只有NFS和HostPath类型卷支持回收策略，AWS EBS,GCE PD,Azure Disk和Cinder支持删除(Delete)策略。</p>
+<h3 id="PV类型"><a href="#PV类型" class="headerlink" title="PV类型"></a>PV类型</h3><ul>
+<li>GCEPersistentDisk</li>
+<li>AWSElasticBlockStore</li>
+<li>AzureFile</li>
+<li>AzureDisk</li>
+<li>FC (Fibre Channel)</li>
+<li>Flexvolume</li>
+<li>Flocker</li>
+<li>NFS</li>
+<li>iSCSI</li>
+<li>RBD (Ceph Block Device)</li>
+<li>CephFS</li>
+<li>Cinder (OpenStack block storage)</li>
+<li>Glusterfs</li>
+<li>VsphereVolume</li>
+<li>Quobyte Volumes</li>
+<li>HostPath (Single node testing only – local storage is not supported in any way and WILL NOT WORK in a multi-node cluster)</li>
+<li>Portworx Volumes</li>
+<li>ScaleIO Volumes</li>
+<li>StorageOS</li>
+</ul>
+<h3 id="PV卷阶段状态"><a href="#PV卷阶段状态" class="headerlink" title="PV卷阶段状态"></a>PV卷阶段状态</h3><ul>
+<li>Available – 资源尚未被claim使用</li>
+<li>Bound – 卷已经被绑定到claim了</li>
+<li>Released – claim被删除，卷处于释放状态，但未被集群回收。</li>
+<li>Failed – 卷自动回收失败</li>
+</ul>
+<h2 id="演示：创建PV"><a href="#演示：创建PV" class="headerlink" title="演示：创建PV"></a>演示：创建PV</h2><p>nfs服务器在上一篇已经部署，详情请看上一篇博客。</p>
+<h3 id="准备nfs服务"><a href="#准备nfs服务" class="headerlink" title="准备nfs服务"></a>准备nfs服务</h3>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://blog.hengshare.top/2023/03/27/k8s-pv%E5%92%8Cpvc/" data-id="cln162dkp0019w04edkw6501x" data-title="k8s-pv和pvc" class="article-share-link">分享</a>
+      
+      
+        <a href="/2023/03/27/k8s-pv%E5%92%8Cpvc/#comments" class="article-comment-link">
+          <span class="post-comments-count valine-comment-count" data-xid="/2023/03/27/k8s-pv%E5%92%8Cpvc/" itemprop="commentCount"></span>
+          留言
+        </a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/k3s/" rel="tag">k3s</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kubernates/" rel="tag">kubernates</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BF%90%E7%BB%B4/" rel="tag">运维</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2023/03/29/jrebel%E6%96%B0%E7%89%88%E6%9C%AC%E6%BF%80%E6%B4%BB%E4%B8%8D%E4%BA%86-%E9%99%8D%E7%BA%A7%E6%BF%80%E6%B4%BB/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          jrebel新版本激活不了,降级激活
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2023/03/27/%E5%B8%B8%E7%94%A8%E7%9A%84%E5%AD%90%E7%BD%91%E6%8E%A9%E7%A0%81/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">常用的子网掩码、内网段</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+  <section id="comments" class="vcomment">
+
+  </section>
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">九月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/06/">六月 2023</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">五月 2023</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">四月 2023</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">三月 2023</a><span class="archive-list-count">36</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI/" rel="tag">AI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/" rel="tag">Android</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MQ/" rel="tag">MQ</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MacOs/" rel="tag">MacOs</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/chrome%E6%8F%92%E4%BB%B6/" rel="tag">chrome插件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">css</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gcc/" rel="tag">gcc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/go/" rel="tag">go</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/" rel="tag">html</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/k3s/" rel="tag">k3s</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kubernates/" rel="tag">kubernates</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lua/" rel="tag">lua</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/" rel="tag">maven</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mq/" rel="tag">mq</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/" rel="tag">mysql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/" rel="tag">nginx</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openrestry/" rel="tag">openrestry</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/picgo/" rel="tag">picgo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vmware/" rel="tag">vmware</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vscode/" rel="tag">vscode</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zsh/" rel="tag">zsh</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6/" rel="tag">中间件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BA%A7%E7%BA%BF%E9%97%AE%E9%A2%98/" rel="tag">产线问题</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BB%A3%E7%90%86/" rel="tag">代理</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%90%8D%E8%AF%8D%E8%A7%A3%E9%87%8A/" rel="tag">名词解释</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%90%8E%E7%AB%AF/" rel="tag">后端</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" rel="tag">基础知识</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%89%E5%85%A8/" rel="tag">安全</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E4%BD%9C%E6%80%BB%E7%BB%93/" rel="tag">工作总结</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag">工具</a><span class="tag-list-count">19</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/" rel="tag">开发工具</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%A5%E5%B8%B8%E9%9A%8F%E7%AC%94/" rel="tag">日常随笔</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%8B%E8%AF%95/" rel="tag">测试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%90%E7%BB%B4/" rel="tag">运维</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%80%86%E5%90%91/" rel="tag">逆向</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag">随笔</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%BB%91%E8%8B%B9%E6%9E%9C/" rel="tag">黑苹果</a><span class="tag-list-count">7</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/09/27/springboot%E4%B8%ADwebsocket%E4%BD%BF%E7%94%A8/">springboot中websocket使用</a>
+          </li>
+        
+          <li>
+            <a href="/2023/06/16/%E5%9B%BE%E5%83%8F-jpg-png%E7%AD%89%E5%9B%BE%E7%89%87%E6%A0%BC%E5%BC%8F%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB/">图像-jpg,png等图片格式有什么区别</a>
+          </li>
+        
+          <li>
+            <a href="/2023/06/08/consul-%E7%AE%80%E5%8D%95%E4%BB%8B%E7%BB%8D/">consul-简单介绍</a>
+          </li>
+        
+          <li>
+            <a href="/2023/06/02/go-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">go-学习笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2023/06/02/go-%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Go-Modules%E7%9A%84go-mod%E4%B8%8Ego-sum/">go-深入理解Go Modules的go.mod与go.sum</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/31/ffplay%E5%8F%82%E6%95%B0%E4%BB%A5%E5%8F%8A%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">ffplay参数以及常用命令</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/31/ffprobe%E5%8F%82%E6%95%B0%E4%BB%A5%E5%8F%8A%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">ffprobe参数以及常用命令</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/31/ffmpeg%E5%8F%82%E6%95%B0%E4%BB%A5%E5%8F%8A%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">ffmpeg参数以及常用命令</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/AI/" style="font-size: 10px;">AI</a> <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/MQ/" style="font-size: 10px;">MQ</a> <a href="/tags/MacOs/" style="font-size: 16.25px;">MacOs</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/chrome%E6%8F%92%E4%BB%B6/" style="font-size: 10px;">chrome插件</a> <a href="/tags/css/" style="font-size: 11.25px;">css</a> <a href="/tags/gcc/" style="font-size: 10px;">gcc</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/go/" style="font-size: 11.25px;">go</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/k3s/" style="font-size: 17.5px;">k3s</a> <a href="/tags/kubernates/" style="font-size: 17.5px;">kubernates</a> <a href="/tags/linux/" style="font-size: 16.25px;">linux</a> <a href="/tags/lua/" style="font-size: 10px;">lua</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/mq/" style="font-size: 10px;">mq</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 13.75px;">nginx</a> <a href="/tags/openrestry/" style="font-size: 11.25px;">openrestry</a> <a href="/tags/picgo/" style="font-size: 10px;">picgo</a> <a href="/tags/vmware/" style="font-size: 10px;">vmware</a> <a href="/tags/vscode/" style="font-size: 12.5px;">vscode</a> <a href="/tags/zsh/" style="font-size: 10px;">zsh</a> <a href="/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6/" style="font-size: 10px;">中间件</a> <a href="/tags/%E4%BA%A7%E7%BA%BF%E9%97%AE%E9%A2%98/" style="font-size: 11.25px;">产线问题</a> <a href="/tags/%E4%BB%A3%E7%90%86/" style="font-size: 11.25px;">代理</a> <a href="/tags/%E5%90%8D%E8%AF%8D%E8%A7%A3%E9%87%8A/" style="font-size: 10px;">名词解释</a> <a href="/tags/%E5%90%8E%E7%AB%AF/" style="font-size: 10px;">后端</a> <a href="/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" style="font-size: 11.25px;">基础知识</a> <a href="/tags/%E5%AE%89%E5%85%A8/" style="font-size: 10px;">安全</a> <a href="/tags/%E5%B7%A5%E4%BD%9C%E6%80%BB%E7%BB%93/" style="font-size: 10px;">工作总结</a> <a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 20px;">工具</a> <a href="/tags/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/" style="font-size: 11.25px;">开发工具</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 10px;">数据库</a> <a href="/tags/%E6%97%A5%E5%B8%B8%E9%9A%8F%E7%AC%94/" style="font-size: 12.5px;">日常随笔</a> <a href="/tags/%E6%B5%8B%E8%AF%95/" style="font-size: 10px;">测试</a> <a href="/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 15px;">网络</a> <a href="/tags/%E8%BF%90%E7%BB%B4/" style="font-size: 18.75px;">运维</a> <a href="/tags/%E9%80%86%E5%90%91/" style="font-size: 10px;">逆向</a> <a href="/tags/%E9%9A%8F%E7%AC%94/" style="font-size: 11.25px;">随笔</a> <a href="/tags/%E9%BB%91%E8%8B%B9%E6%9E%9C/" style="font-size: 17.5px;">黑苹果</a>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+        <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a></br>
+All website licensed under <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a></br>
+      
+      &copy; 2023 StivenYang<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/tags/%E5%AE%89%E5%85%A8/" class="mobile-nav-link">安全</a>
+  
+    <a href="/%E5%85%B3%E4%BA%8E" class="mobile-nav-link">关于</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js"></script>
+
+<script>
+    var GUEST_INFO = ['nick','mail','link'];
+    var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+        return GUEST_INFO.indexOf(item) > -1
+    });
+    var notify = 'true' == true;
+    var verify = 'false' == true;
+    new Valine({
+        el: '.vcomment',
+        notify: notify,
+        verify: verify,
+        appId: "WZFGfb3fsFijmCwSr5V1g1QW-gzGzoHsz",
+        appKey: "IOaNIwfFDHG22j4kkrNX52Cw",
+        placeholder: "留言",
+        pageSize:'10',
+        avatar:'mm',
+        lang:'zh-cn'
+    });
+</script>
+
+  </div>
+</body>
+</html>

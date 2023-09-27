@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FGVBL4CYKC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-FGVBL4CYKC');
+</script>
+<!-- End Google Analytics -->
+
+  
+  <title>linux使用代理 | StivenYang</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta property="og:type" content="article">
+<meta property="og:title" content="linux使用代理">
+<meta property="og:url" content="https://blog.hengshare.top/2020/03/18/linux%E4%BD%BF%E7%94%A8%E4%BB%A3%E7%90%86/index.html">
+<meta property="og:site_name" content="StivenYang">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-03-18T10:59:44.000Z">
+<meta property="article:modified_time" content="2023-09-27T03:07:42.556Z">
+<meta property="article:author" content="StivenYang">
+<meta property="article:tag" content="工具">
+<meta property="article:tag" content="linux">
+<meta property="article:tag" content="代理">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="StivenYang" type="application/atom+xml">
+  
+  
+    <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+    <link rel="manifest" href="images/site.webmanifest">
+    <!-- <link rel="shortcut icon" href="/images/favicon.png"> -->
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">StivenYang</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">StivenYang的个人网站</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">主页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="/tags/%E5%AE%89%E5%85%A8/">安全</a>
+        
+          <a class="main-nav-link" href="/%E5%85%B3%E4%BA%8E">关于</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS 订阅"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://blog.hengshare.top"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-linux使用代理" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2020/03/18/linux%E4%BD%BF%E7%94%A8%E4%BB%A3%E7%90%86/" class="article-date">
+  <time class="dt-published" datetime="2020-03-18T10:59:44.000Z" itemprop="datePublished">2020-03-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      linux使用代理
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+          <div id="toc" class="toc-article">
+          <strong class="toc-title">文章目录</strong>
+          <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BDv2ray%E7%9A%84%E5%AE%89%E8%A3%85%E5%8C%85"><span class="toc-number">1.</span> <span class="toc-text">下载v2ray的安装包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E5%8E%8B%E5%AE%89%E8%A3%85%E5%8C%85"><span class="toc-number">2.</span> <span class="toc-text">解压安装包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6-%E6%9C%80%E5%A5%BD%E7%9B%B4%E6%8E%A5%E5%9C%A8%E5%85%B6%E4%BB%96%E6%9C%BA%E5%99%A8%E4%B8%8A%E7%94%9F%E6%88%90%E4%B8%80%E4%BB%BD"><span class="toc-number">3.</span> <span class="toc-text">修改配置文件(最好直接在其他机器上生成一份)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%A7%E8%A1%8C%E8%84%9A%E6%9C%AC%E5%90%AF%E5%8A%A8%E6%9C%8D%E5%8A%A1"><span class="toc-number">4.</span> <span class="toc-text">执行脚本启动服务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E5%BC%80%E6%9C%BA%E5%90%AF%E5%8A%A8"><span class="toc-number">5.</span> <span class="toc-text">实现开机启动</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8deepin%E8%87%AA%E5%B8%A6%E7%9A%84%E4%BB%A3%E7%90%86%E5%B7%A5%E5%85%B7%E8%BF%9B%E8%A1%8C%E4%B8%8A%E7%BD%91"><span class="toc-number">6.</span> <span class="toc-text">使用deepin自带的代理工具进行上网</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8switchyomega%E6%8F%92%E4%BB%B6%E4%B8%8A%E7%BD%91"><span class="toc-number">7.</span> <span class="toc-text">使用switchyomega插件上网</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%8C%E7%BB%93%E6%92%92%E8%8A%B1"><span class="toc-number">8.</span> <span class="toc-text">完结撒花</span></a></li></ol>
+        </div>
+        
+        <h2 id="下载v2ray的安装包"><a href="#下载v2ray的安装包" class="headerlink" title="下载v2ray的安装包"></a>下载v2ray的安装包</h2><p>因为是正常软件使用，发布的版本基本上是很稳定的，所以可以下载最新发布版本，地址：<code>https://github.com/v2ray/v2ray-core/releases</code></p>
+<p>下载linux版本：<code>v2ray-linux-64.zip</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://github.com/v2ray/v2ray-core/releases/download/v4.28.2/v2ray-linux-64.zip</span><br></pre></td></tr></table></figure>
+
+<h2 id="解压安装包"><a href="#解压安装包" class="headerlink" title="解压安装包"></a>解压安装包</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">unzip v2ray-linux-64.zip</span><br><span class="line">cd v2ray</span><br></pre></td></tr></table></figure>
+
+<h2 id="修改配置文件-最好直接在其他机器上生成一份"><a href="#修改配置文件-最好直接在其他机器上生成一份" class="headerlink" title="修改配置文件(最好直接在其他机器上生成一份)"></a>修改配置文件(最好直接在其他机器上生成一份)</h2><p>修改里面的配置文件:<code>config.json</code></p>
+<p>主要修改<code>outbounds</code>节点下面的<code>settings</code>节点下面的<code>vnext</code>节点配置，这个相当于要连接到远端的配置。</p>
+<p>还有一个要看的是<code>inbounds</code>节点下的配置，这个相当于在本地开启的端口，如果使用代理工具的话，可以直接连接到本地的这个端口，实现上网。</p>
+<p>比较重要的就是上面的两个节点配置。其他的默认就可以。</p>
+<p>下面我贴上我正在使用的配置文件，目前还是可以使用的。<code>2020年03月18日21:29:50</code></p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;policy&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">null</span></span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;log&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;access&quot;</span><span class="punctuation">:</span> <span class="string">&quot;&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;error&quot;</span><span class="punctuation">:</span> <span class="string">&quot;&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;loglevel&quot;</span><span class="punctuation">:</span> <span class="string">&quot;warning&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;inbounds&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;tag&quot;</span><span class="punctuation">:</span> <span class="string">&quot;proxy&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;port&quot;</span><span class="punctuation">:</span> <span class="number">10808</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;listen&quot;</span><span class="punctuation">:</span> <span class="string">&quot;127.0.0.1&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;protocol&quot;</span><span class="punctuation">:</span> <span class="string">&quot;socks&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;sniffing&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;enabled&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;destOverride&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">          <span class="string">&quot;http&quot;</span><span class="punctuation">,</span></span><br><span class="line">          <span class="string">&quot;tls&quot;</span></span><br><span class="line">        <span class="punctuation">]</span></span><br><span class="line">      <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;settings&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;auth&quot;</span><span class="punctuation">:</span> <span class="string">&quot;noauth&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;udp&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;ip&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">null</span></span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;address&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">null</span></span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;clients&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">null</span></span></span><br><span class="line">      <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;streamSettings&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">null</span></span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line">  <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;outbounds&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;tag&quot;</span><span class="punctuation">:</span> <span class="string">&quot;proxy&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;protocol&quot;</span><span class="punctuation">:</span> <span class="string">&quot;vmess&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;settings&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;vnext&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">          <span class="punctuation">&#123;</span></span><br><span class="line">            <span class="attr">&quot;address&quot;</span><span class="punctuation">:</span> <span class="string">&quot;23.225.57.210&quot;</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;port&quot;</span><span class="punctuation">:</span> <span class="number">443</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;users&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">              <span class="punctuation">&#123;</span></span><br><span class="line">                <span class="attr">&quot;id&quot;</span><span class="punctuation">:</span> <span class="string">&quot;418048af-a293-4b99-9b0c-98ca3580dd23&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="attr">&quot;alterId&quot;</span><span class="punctuation">:</span> <span class="number">64</span><span class="punctuation">,</span></span><br><span class="line">                <span class="attr">&quot;email&quot;</span><span class="punctuation">:</span> <span class="string">&quot;t@t.tt&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="attr">&quot;security&quot;</span><span class="punctuation">:</span> <span class="string">&quot;auto&quot;</span></span><br><span class="line">              <span class="punctuation">&#125;</span></span><br><span class="line">            <span class="punctuation">]</span></span><br><span class="line">          <span class="punctuation">&#125;</span></span><br><span class="line">        <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;servers&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">null</span></span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;response&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">null</span></span></span><br><span class="line">      <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;streamSettings&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;network&quot;</span><span class="punctuation">:</span> <span class="string">&quot;ws&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;security&quot;</span><span class="punctuation">:</span> <span class="string">&quot;tls&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;tlsSettings&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">          <span class="attr">&quot;allowInsecure&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">          <span class="attr">&quot;serverName&quot;</span><span class="punctuation">:</span> <span class="string">&quot;www.2604919.xyz&quot;</span></span><br><span class="line">        <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;tcpSettings&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">null</span></span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;kcpSettings&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">null</span></span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;wsSettings&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">          <span class="attr">&quot;connectionReuse&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">          <span class="attr">&quot;path&quot;</span><span class="punctuation">:</span> <span class="string">&quot;/footers&quot;</span><span class="punctuation">,</span></span><br><span class="line">          <span class="attr">&quot;headers&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">            <span class="attr">&quot;Host&quot;</span><span class="punctuation">:</span> <span class="string">&quot;www.2604919.xyz&quot;</span></span><br><span class="line">          <span class="punctuation">&#125;</span></span><br><span class="line">        <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;httpSettings&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">null</span></span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;quicSettings&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">null</span></span></span><br><span class="line">      <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;mux&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;enabled&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;concurrency&quot;</span><span class="punctuation">:</span> <span class="number">8</span></span><br><span class="line">      <span class="punctuation">&#125;</span></span><br><span class="line">    <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;tag&quot;</span><span class="punctuation">:</span> <span class="string">&quot;direct&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;protocol&quot;</span><span class="punctuation">:</span> <span class="string">&quot;freedom&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;settings&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;vnext&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">null</span></span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;servers&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">null</span></span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;response&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">null</span></span></span><br><span class="line">      <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;streamSettings&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">null</span></span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;mux&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">null</span></span></span><br><span class="line">    <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;tag&quot;</span><span class="punctuation">:</span> <span class="string">&quot;block&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;protocol&quot;</span><span class="punctuation">:</span> <span class="string">&quot;blackhole&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;settings&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;vnext&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">null</span></span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;servers&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">null</span></span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;response&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">          <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;http&quot;</span></span><br><span class="line">        <span class="punctuation">&#125;</span></span><br><span class="line">      <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;streamSettings&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">null</span></span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;mux&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">null</span></span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line">  <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;stats&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">null</span></span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;api&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">null</span></span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;dns&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">null</span></span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;routing&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;domainStrategy&quot;</span><span class="punctuation">:</span> <span class="string">&quot;IPIfNonMatch&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;rules&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">      <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;field&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;port&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">null</span></span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;inboundTag&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">          <span class="string">&quot;api&quot;</span></span><br><span class="line">        <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;outboundTag&quot;</span><span class="punctuation">:</span> <span class="string">&quot;api&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;ip&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">null</span></span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;domain&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">null</span></span></span><br><span class="line">      <span class="punctuation">&#125;</span></span><br><span class="line">    <span class="punctuation">]</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="执行脚本启动服务"><a href="#执行脚本启动服务" class="headerlink" title="执行脚本启动服务"></a>执行脚本启动服务</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./v2ray</span><br></pre></td></tr></table></figure>
+
+<h2 id="实现开机启动"><a href="#实现开机启动" class="headerlink" title="实现开机启动"></a>实现开机启动</h2><p>这边我是按照自己的目录来的，读者可以按照自己的软件目录配置：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 这里配置的是当前登录用户的脚本，如果想全局开启，可以放到/etc/profile</span><br><span class="line">echo &quot;nohup /root/v2ray/v2ray &gt; /dev/null 2&gt;&amp;1 &amp;&quot; &gt;&gt; ~/.bashrc</span><br><span class="line"># 使配置生效</span><br><span class="line">source ~/.bashrc</span><br></pre></td></tr></table></figure>
+
+<p>命令行代理：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/profile</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加如下代理脚本</span></span><br><span class="line"><span class="built_in">alias</span> proxy=<span class="string">&#x27;export all_proxy=socks5://127.0.0.1:1080 https_proxy=http://127.0.0.1:1081 http_proxy=http://127.0.0.1:1081&#x27;</span></span><br><span class="line"><span class="built_in">alias</span> unproxy=<span class="string">&#x27;unset all_proxy https_proxy http_proxy&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 开启代理</span></span><br><span class="line"><span class="built_in">source</span> /etc/profile</span><br><span class="line"></span><br><span class="line"><span class="comment"># 检查是否生效</span></span><br><span class="line">curl cip.cc</span><br></pre></td></tr></table></figure>
+<p>命令行想走代理的时候，直接使用proxy开启。不用可以使用unproxy关闭</p>
+<h2 id="使用deepin自带的代理工具进行上网"><a href="#使用deepin自带的代理工具进行上网" class="headerlink" title="使用deepin自带的代理工具进行上网"></a>使用deepin自带的代理工具进行上网</h2><p>设置-》网络-》系统代理-》手动-》然后根据上面我们配置的inbounds中的配置来进行配置，主要看协议和端口-》点击确定完成</p>
+<h2 id="使用switchyomega插件上网"><a href="#使用switchyomega插件上网" class="headerlink" title="使用switchyomega插件上网"></a>使用switchyomega插件上网</h2><p>首先需要自己想办法下载一个离线版的switchyomega插件，或者在可以上外网的情况下去应用商店下载该插件。</p>
+<p>然后配置插件：</p>
+<ul>
+<li>选项-》proxy-》配置<code>inbounds</code>中的ip、端口、协议-》点左边的<code>应用选项</code></li>
+<li>auto switch-》选中规则列表规则-》情景模式选择<code>proxy</code>-》默认情景模式选择<code>直连模式</code>-》规则列表设置选择<code>autoproxy</code>-》规则列表网址填<code>https://raw.githubusercontent.com/gfwlist/gfwlist/master/gfwlist.txt</code>-》立即更新情景模式-》点左边的<code>应用选项</code></li>
+</ul>
+<h2 id="完结撒花"><a href="#完结撒花" class="headerlink" title="完结撒花"></a>完结撒花</h2>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://blog.hengshare.top/2020/03/18/linux%E4%BD%BF%E7%94%A8%E4%BB%A3%E7%90%86/" data-id="cln162dkq001ew04e10yq93zh" data-title="linux使用代理" class="article-share-link">分享</a>
+      
+      
+        <a href="/2020/03/18/linux%E4%BD%BF%E7%94%A8%E4%BB%A3%E7%90%86/#comments" class="article-comment-link">
+          <span class="post-comments-count valine-comment-count" data-xid="/2020/03/18/linux%E4%BD%BF%E7%94%A8%E4%BB%A3%E7%90%86/" itemprop="commentCount"></span>
+          留言
+        </a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BB%A3%E7%90%86/" rel="tag">代理</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag">工具</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2023/03/12/%E9%80%86%E5%90%91%E5%AD%A6%E4%B9%A0-%E8%B7%AF%E7%BA%BF%E8%A7%84%E5%88%92/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          逆向学习-路线规划
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+  
+</article>
+
+
+
+  <section id="comments" class="vcomment">
+
+  </section>
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">九月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/06/">六月 2023</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">五月 2023</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">四月 2023</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">三月 2023</a><span class="archive-list-count">36</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI/" rel="tag">AI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/" rel="tag">Android</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MQ/" rel="tag">MQ</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MacOs/" rel="tag">MacOs</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/chrome%E6%8F%92%E4%BB%B6/" rel="tag">chrome插件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">css</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gcc/" rel="tag">gcc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/go/" rel="tag">go</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/" rel="tag">html</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/k3s/" rel="tag">k3s</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kubernates/" rel="tag">kubernates</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lua/" rel="tag">lua</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/" rel="tag">maven</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mq/" rel="tag">mq</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/" rel="tag">mysql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/" rel="tag">nginx</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openrestry/" rel="tag">openrestry</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/picgo/" rel="tag">picgo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vmware/" rel="tag">vmware</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vscode/" rel="tag">vscode</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zsh/" rel="tag">zsh</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6/" rel="tag">中间件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BA%A7%E7%BA%BF%E9%97%AE%E9%A2%98/" rel="tag">产线问题</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BB%A3%E7%90%86/" rel="tag">代理</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%90%8D%E8%AF%8D%E8%A7%A3%E9%87%8A/" rel="tag">名词解释</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%90%8E%E7%AB%AF/" rel="tag">后端</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" rel="tag">基础知识</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%89%E5%85%A8/" rel="tag">安全</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E4%BD%9C%E6%80%BB%E7%BB%93/" rel="tag">工作总结</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag">工具</a><span class="tag-list-count">19</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/" rel="tag">开发工具</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%A5%E5%B8%B8%E9%9A%8F%E7%AC%94/" rel="tag">日常随笔</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%8B%E8%AF%95/" rel="tag">测试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%90%E7%BB%B4/" rel="tag">运维</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%80%86%E5%90%91/" rel="tag">逆向</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag">随笔</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%BB%91%E8%8B%B9%E6%9E%9C/" rel="tag">黑苹果</a><span class="tag-list-count">7</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/09/27/springboot%E4%B8%ADwebsocket%E4%BD%BF%E7%94%A8/">springboot中websocket使用</a>
+          </li>
+        
+          <li>
+            <a href="/2023/06/16/%E5%9B%BE%E5%83%8F-jpg-png%E7%AD%89%E5%9B%BE%E7%89%87%E6%A0%BC%E5%BC%8F%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB/">图像-jpg,png等图片格式有什么区别</a>
+          </li>
+        
+          <li>
+            <a href="/2023/06/08/consul-%E7%AE%80%E5%8D%95%E4%BB%8B%E7%BB%8D/">consul-简单介绍</a>
+          </li>
+        
+          <li>
+            <a href="/2023/06/02/go-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">go-学习笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2023/06/02/go-%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Go-Modules%E7%9A%84go-mod%E4%B8%8Ego-sum/">go-深入理解Go Modules的go.mod与go.sum</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/31/ffplay%E5%8F%82%E6%95%B0%E4%BB%A5%E5%8F%8A%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">ffplay参数以及常用命令</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/31/ffprobe%E5%8F%82%E6%95%B0%E4%BB%A5%E5%8F%8A%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">ffprobe参数以及常用命令</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/31/ffmpeg%E5%8F%82%E6%95%B0%E4%BB%A5%E5%8F%8A%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">ffmpeg参数以及常用命令</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/AI/" style="font-size: 10px;">AI</a> <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/MQ/" style="font-size: 10px;">MQ</a> <a href="/tags/MacOs/" style="font-size: 16.25px;">MacOs</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/chrome%E6%8F%92%E4%BB%B6/" style="font-size: 10px;">chrome插件</a> <a href="/tags/css/" style="font-size: 11.25px;">css</a> <a href="/tags/gcc/" style="font-size: 10px;">gcc</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/go/" style="font-size: 11.25px;">go</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/k3s/" style="font-size: 17.5px;">k3s</a> <a href="/tags/kubernates/" style="font-size: 17.5px;">kubernates</a> <a href="/tags/linux/" style="font-size: 16.25px;">linux</a> <a href="/tags/lua/" style="font-size: 10px;">lua</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/mq/" style="font-size: 10px;">mq</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 13.75px;">nginx</a> <a href="/tags/openrestry/" style="font-size: 11.25px;">openrestry</a> <a href="/tags/picgo/" style="font-size: 10px;">picgo</a> <a href="/tags/vmware/" style="font-size: 10px;">vmware</a> <a href="/tags/vscode/" style="font-size: 12.5px;">vscode</a> <a href="/tags/zsh/" style="font-size: 10px;">zsh</a> <a href="/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6/" style="font-size: 10px;">中间件</a> <a href="/tags/%E4%BA%A7%E7%BA%BF%E9%97%AE%E9%A2%98/" style="font-size: 11.25px;">产线问题</a> <a href="/tags/%E4%BB%A3%E7%90%86/" style="font-size: 11.25px;">代理</a> <a href="/tags/%E5%90%8D%E8%AF%8D%E8%A7%A3%E9%87%8A/" style="font-size: 10px;">名词解释</a> <a href="/tags/%E5%90%8E%E7%AB%AF/" style="font-size: 10px;">后端</a> <a href="/tags/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" style="font-size: 11.25px;">基础知识</a> <a href="/tags/%E5%AE%89%E5%85%A8/" style="font-size: 10px;">安全</a> <a href="/tags/%E5%B7%A5%E4%BD%9C%E6%80%BB%E7%BB%93/" style="font-size: 10px;">工作总结</a> <a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 20px;">工具</a> <a href="/tags/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/" style="font-size: 11.25px;">开发工具</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 10px;">数据库</a> <a href="/tags/%E6%97%A5%E5%B8%B8%E9%9A%8F%E7%AC%94/" style="font-size: 12.5px;">日常随笔</a> <a href="/tags/%E6%B5%8B%E8%AF%95/" style="font-size: 10px;">测试</a> <a href="/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 15px;">网络</a> <a href="/tags/%E8%BF%90%E7%BB%B4/" style="font-size: 18.75px;">运维</a> <a href="/tags/%E9%80%86%E5%90%91/" style="font-size: 10px;">逆向</a> <a href="/tags/%E9%9A%8F%E7%AC%94/" style="font-size: 11.25px;">随笔</a> <a href="/tags/%E9%BB%91%E8%8B%B9%E6%9E%9C/" style="font-size: 17.5px;">黑苹果</a>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+        <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a></br>
+All website licensed under <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a></br>
+      
+      &copy; 2023 StivenYang<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">主页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/tags/%E5%AE%89%E5%85%A8/" class="mobile-nav-link">安全</a>
+  
+    <a href="/%E5%85%B3%E4%BA%8E" class="mobile-nav-link">关于</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js"></script>
+
+<script>
+    var GUEST_INFO = ['nick','mail','link'];
+    var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+        return GUEST_INFO.indexOf(item) > -1
+    });
+    var notify = 'true' == true;
+    var verify = 'false' == true;
+    new Valine({
+        el: '.vcomment',
+        notify: notify,
+        verify: verify,
+        appId: "WZFGfb3fsFijmCwSr5V1g1QW-gzGzoHsz",
+        appKey: "IOaNIwfFDHG22j4kkrNX52Cw",
+        placeholder: "留言",
+        pageSize:'10',
+        avatar:'mm',
+        lang:'zh-cn'
+    });
+</script>
+
+  </div>
+</body>
+</html>
